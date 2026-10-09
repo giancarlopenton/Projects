@@ -1,6 +1,6 @@
-# Projects
+# First Light
 
-Python projects using NumPy, Matplotlib, and PyTorch.
+Python project using NumPy, Matplotlib, and PyTorch.
 
 ## Setup
 
