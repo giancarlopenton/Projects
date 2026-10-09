@@ -1,4 +1,4 @@
-# First Light
+# Projects
 
 Python project using NumPy, Matplotlib, and PyTorch.
 
