@@ -2,6 +2,17 @@
 
 Python project using NumPy, Matplotlib, and PyTorch.
 
+## Environment
+
+Developed and tested on:
+
+| | |
+|---|---|
+| OS | macOS 27.0.1 (Apple Silicon, arm64) |
+| Python | 3.14.5 |
+| PyTorch | 2.14.1 |
+| Device | Apple M4 Pro GPU via MPS |
+
 ## Setup
 
 Requires Python 3.12 or newer (check with `python3 --version`).
