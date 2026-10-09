@@ -1,6 +1,6 @@
 # Projects
 
-Python project using NumPy, Matplotlib, and PyTorch.
+Python projects using NumPy, Matplotlib, and PyTorch.
 
 ## Environment
 
