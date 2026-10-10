@@ -7,11 +7,13 @@ import torch
 
 
 def main():
+  numpy_seed = np.random.default_rng(100)
+  torch_seed = torch.manual_seed(100)
   trig_plot()
   dtype_comparison()
   precision_plot()
   memory_test()
-
+  noise_data()
 
 def trig_plot():
 
@@ -87,6 +89,24 @@ def memory_test():
   print(f'from_numpy | before: {before}| after changing array: {shared_memory[0]}')
   print(f'torch.tensor | before: {before} | after changing array: {independent_memory[0]}')
   
+
+
+def noise_data():
+  x = torch.linspace(0, 10, 200)
+  tensor_1d = torch.randn(200)
+  noise = tensor_1d * 1.5
+  y = 2 * x + 1 + noise
+  y_true = 2 * x + 1
+
+  fig, ax = plt.subplots(figsize=(7,5))
+  ax.scatter(x, y, alpha=0.5, label='data')
+  ax.set_xlabel('Input')
+  ax.set_ylabel('Output')
+  ax.set_title('Noise Data')
+  ax.plot(x, y_true, label='true line (y= 2x + 1)', color='red')
+  ax.legend()
+
+  fig.savefig(create_path_png('noise_data'))
 
 def create_path_png(name):  
   script_dir = Path(__file__).resolve().parent

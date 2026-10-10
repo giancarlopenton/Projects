@@ -34,10 +34,22 @@ Most of the error comes from storing x itself in float32, not from `sin`. float3
 
 | function              | before   | after |
 |-----------------------|----------|-------|
-| torch.from_numpy()    | 98       | 500   |
-| torch.tensor()        | 98       | 98    | 
+| `torch.from_numpy()`  | 98       | 500   |
+| `torch.tensor()`      | 98       | 98    |
 
-When turning a NumPy array into a tensor using the from_numpy function, it puts the new tensor in the same memory as the original NumPy array. When you create a new tensor using the torch.tensor function, it now is independent and has its own location in memory.
+When you turn a NumPy array into a tensor with `torch.from_numpy()`, the new tensor shares the same memory as the original NumPy array. When you create a tensor with `torch.tensor()`, it is independent and has its own location in memory.
 
-Use the from_numpy() when the data is large and you won’t modify the original, because it avoids a copy.
-Use the torch.tensor() when the original might change and you need your own independent version.
+- Use `torch.from_numpy()` when the data is large and you won’t modify the original, because it avoids a copy.
+- Use `torch.tensor()` when the original might change and you need your own independent version.
+
+## Noise Data
+
+![Noise Data](figures/noise_data.png)
+
+This figure uses 200 evenly spaced x values from 0 to 10. For y, I used 2x + 1 and added noise that I created with a standard deviation of 1.5. I added that noise to the y values to replicate real-life data, because real data isn't going to be a perfect straight line.
+
+When I graphed it, I could clearly see the data points scatter above and below the true line.
+
+### What the seed does
+
+The seed controls the random numbers in the `tensor_1d` variable. When you use the same seed, you get the same random numbers on every run, so the figure is identical and the results are reproducible. Changing the seed changes those random numbers, so the data points move. The x values and the true line don't change, because I created them myself, not randomly.
