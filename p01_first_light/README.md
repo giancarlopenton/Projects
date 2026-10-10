@@ -29,3 +29,15 @@ The plot shows how far float32 `sin(x)` is from float64 `sin(x)` at each point, 
 
 Most of the error comes from storing x itself in float32, not from `sin`. float32 keeps about 7 significant digits, so the rounding error in x grows with |x|: tiny near 0, largest near ±2π. 
 
+
+## Shared Memory vs. Copies
+
+| function              | before   | after |
+|-----------------------|----------|-------|
+| torch.from_numpy()    | 98       | 500   |
+| torch.tensor()        | 98       | 98    | 
+
+When turning a NumPy array into a tensor using the from_numpy function, it puts the new tensor in the same memory as the original NumPy array. When you create a new tensor using the torch.tensor function, it now is independent and has its own location in memory.
+
+Use the from_numpy() when the data is large and you won’t modify the original, because it avoids a copy.
+Use the torch.tensor() when the original might change and you need your own independent version.

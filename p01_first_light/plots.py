@@ -5,10 +5,12 @@ from pathlib import Path
 import torch
 
 
+
 def main():
   trig_plot()
   dtype_comparison()
   precision_plot()
+  memory_test()
 
 
 def trig_plot():
@@ -76,7 +78,15 @@ def compute_error():
 
   return x_array64, error
 
-
+def memory_test():
+  array = np.array([98, 99, 100])
+  shared_memory = torch.from_numpy(array)
+  independent_memory = torch.tensor(array) 
+  before = array[0]
+  array[0] = 500
+  print(f'from_numpy | before: {before}| after changing array: {shared_memory[0]}')
+  print(f'torch.tensor | before: {before} | after changing array: {independent_memory[0]}')
+  
 
 def create_path_png(name):  
   script_dir = Path(__file__).resolve().parent
